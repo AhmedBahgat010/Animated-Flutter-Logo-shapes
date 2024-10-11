@@ -61,7 +61,6 @@ class _HomeState extends State<Home>
 
     return Scaffold(
       backgroundColor: Colors.blueAccent.shade700,
-
       body: Stack(
         children: [
           AnimatedBuilder(
