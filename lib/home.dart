@@ -55,33 +55,52 @@ class _HomeState extends State<Home>
   Widget build(BuildContext context) {
     Curve curve = Curves.bounceOut;
 
-    /// convert 0-1 to 0-1-0
+    // Convert 0-1 to 0-1-0
     double shake(double animation) =>
         2 * (0.5 - (0.5 - curve.transform(animation)).abs());
 
     return Scaffold(
       backgroundColor: Colors.blueAccent.shade700,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+        centerTitle: true,
+        title: Text(
+          '',
+          style: GoogleFonts.lato(
+            color: Colors.white,
+            fontWeight: FontWeight.w900,
+            fontSize: 18.0,
+          ),
+        ),
+      ),
       body: Stack(
         children: [
-          AnimatedBuilder(
+          Align(
+            alignment: Alignment.topCenter, 
+            child: AnimatedBuilder(
               animation: shakeController!,
               builder: (context, child) {
                 return Transform.translate(
-                  offset: Offset(30, -10),
-                  child: CustomPaint(
-                    size: Size(200, 200), // ضبط الحجم حسب الحاجة
-
-                    painter: FlutterLogoPainter(
-                      flutterLogoProgress: PoninterAnimation?.value ?? 0,
+                  offset: Offset(-80, 70), // No offset for centering
+                  child: SizedBox(
+                    width: 100, // Set your desired width
+                    height: 100, // Set your desired height
+                    child: CustomPaint(
+                      painter: FlutterLogoPainter(
+                        flutterLogoProgress: PoninterAnimation?.value ?? 0,
+                      ),
                     ),
                   ),
                 );
-              }),
+              },
+            ),
+          ),
           if (PoninterAnimation?.value == 1)
             Align(
               alignment: Alignment.center,
               child: Padding(
-                padding: const EdgeInsets.only(left: 20.0,top: 55),
+                padding: const EdgeInsets.only(left: 20.0, top: 0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -113,6 +132,4 @@ class _HomeState extends State<Home>
         ],
       ),
     );
-  }
-}
-
+  }}
